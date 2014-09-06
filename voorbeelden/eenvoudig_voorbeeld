@@ -1,0 +1,4 @@
+int main() {
+write 5 + 5;
+write 25*25; 
+}

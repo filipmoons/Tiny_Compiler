@@ -1,0 +1,11 @@
+int factorial(int f)
+{
+if(f==0) return 0 else f*factorial(f-1);
+}
+
+int tiny()
+{
+int input;
+read input;
+write factorial(input);
+}

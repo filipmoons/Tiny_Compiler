@@ -1,0 +1,11 @@
+int tiny() {
+int a;
+int b;
+int c;
+int d;
+a = 1; 
+b = 2; 
+c = 1 + a; 
+d = 1 + b; 
+return c + d;
+}
