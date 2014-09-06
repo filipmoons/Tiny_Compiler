@@ -1,0 +1,74 @@
+int factorial(int xParamOfFactorial)
+{
+    int result;
+    result = xParamOfFactorial * factorial(xParamOfFactorial - 1);
+}
+int main(int mainPAram)
+{
+    int factorialInput;
+    factorialInput = 5;
+    return factorial(factorialInput);
+}
+
+int ackermann(int m, int n){
+        if (m == 0) return n + 1;
+        if (n == 0) return ackermann(m - 1, 1);
+        return ackermann(m - 1, ackermann(m, n - 1));
+}
+
+int reverseArray(int array[5])
+{
+    int intermediate;
+    intermediate = array[4];
+    array[4] = array[0];
+    array[0] = intermediate;
+
+    intermediate = array[3];
+    array[3] = array[1];
+    array[1] = intermediate;
+
+    intermediate = array[2];
+    array[2] = array[0];
+    array[0] = intermediate;
+}
+int main()
+{
+    int s;
+
+
+    return s;
+}
+
+
+int x;
+int main()
+{
+	x[x] = array[1][1];
+	if(x == 5)
+	{
+		x = 2;
+	}
+	else
+	{
+		x = 3;
+	};
+
+	while(x == 4)
+	{
+		x = x - 1;
+	};
+}
+
+
+int f(int x)
+{
+	return 0;
+}
+
+int main()
+{
+	int arr[1] = {10};
+	int x = 5;
+	x = f(arr[1]);
+}
+}

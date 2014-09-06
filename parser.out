@@ -1,0 +1,1997 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> declaration declarationSTAR
+Rule 2     program -> declaration
+Rule 3     declarationSTAR -> declaration
+Rule 4     declarationSTAR -> declaration declarationSTAR
+Rule 5     declaration -> var_declaration
+Rule 6     declaration -> fun_declaration
+Rule 7     var_declaration -> type NAME SEMICOLON
+Rule 8     fun_declaration -> type NAME LPAR formal_pars RPAR block
+Rule 9     fun_declaration -> type NAME LPAR RPAR block
+Rule 10    formal_pars -> formal_par COMMA formal_parsSTAR
+Rule 11    formal_pars -> formal_par
+Rule 12    formal_parsSTAR -> formal_par
+Rule 13    formal_parsSTAR -> formal_par COMMA formal_parsSTAR
+Rule 14    formal_par -> type NAME
+Rule 15    block -> LBRACE var_declarationSTAR statements RBRACE
+Rule 16    block -> LBRACE statements RBRACE
+Rule 17    var_declarationSTAR -> var_declaration
+Rule 18    var_declarationSTAR -> var_declaration var_declarationSTAR
+Rule 19    statements -> statement SEMICOLON statementsSTAR
+Rule 20    statements -> statement SEMICOLON
+Rule 21    statementsSTAR -> statement SEMICOLON
+Rule 22    statementsSTAR -> statement SEMICOLON statementsSTAR
+Rule 23    statement -> IF LPAR exp RPAR statement
+Rule 24    statement -> IF LPAR exp RPAR statement ELSE statement
+Rule 25    statement -> WHILE LPAR exp RPAR statement
+Rule 26    statement -> WRITE exp
+Rule 27    statement -> READ lexp
+Rule 28    statement -> lexp ASSIGN exp
+Rule 29    statement -> RETURN exp
+Rule 30    statement -> NAME LPAR pars RPAR
+Rule 31    exp -> NUMBER
+Rule 32    exp -> QCHAR
+Rule 33    exp -> exp binop exp
+Rule 34    exp -> unop exp
+Rule 35    exp -> lexp
+Rule 36    unop -> MINUS
+Rule 37    unop -> NOT
+Rule 38    exp -> LPAR exp RPAR
+Rule 39    exp -> NAME LPAR pars RPAR
+Rule 40    exp -> LENGTH lexp
+Rule 41    binop -> MINUS
+Rule 42    binop -> PLUS
+Rule 43    binop -> TIMES
+Rule 44    binop -> DIVIDE
+Rule 45    binop -> EQUAL
+Rule 46    binop -> NEQUAL
+Rule 47    binop -> GREATER
+Rule 48    binop -> LESS
+Rule 49    pars -> exp COMMA parsSTAR
+Rule 50    pars -> exp
+Rule 51    parsSTAR -> exp
+Rule 52    parsSTAR -> exp COMMA parsSTAR
+Rule 53    type -> INT
+Rule 54    type -> CHAR
+Rule 55    type -> type LBRACK NUMBER RBRACK
+Rule 56    lexp -> var
+Rule 57    lexp -> lexp LBRACK exp RBRACK
+Rule 58    var -> NAME
+
+Terminals, with rules where they appear
+
+ASSIGN               : 28
+CHAR                 : 54
+COMMA                : 10 13 49 52
+COMMENT              : 
+DIVIDE               : 44
+ELSE                 : 24
+EQUAL                : 45
+GREATER              : 47
+IF                   : 23 24
+INT                  : 53
+LBRACE               : 15 16
+LBRACK               : 55 57
+LENGTH               : 40
+LESS                 : 48
+LPAR                 : 8 9 23 24 25 30 38 39
+MINUS                : 36 41
+NAME                 : 7 8 9 14 30 39 58
+NEQUAL               : 46
+NOT                  : 37
+NUMBER               : 31 55
+PLUS                 : 42
+QCHAR                : 32
+RBRACE               : 15 16
+RBRACK               : 55 57
+READ                 : 27
+RETURN               : 29
+RPAR                 : 8 9 23 24 25 30 38 39
+SEMICOLON            : 7 19 20 21 22
+TIMES                : 43
+WHILE                : 25
+WRITE                : 26
+error                : 
+
+Nonterminals, with rules where they appear
+
+binop                : 33
+block                : 8 9
+declaration          : 1 2 3 4
+declarationSTAR      : 1 4
+exp                  : 23 24 25 26 28 29 33 33 34 38 49 50 51 52 57
+formal_par           : 10 11 12 13
+formal_pars          : 8
+formal_parsSTAR      : 10 13
+fun_declaration      : 6
+lexp                 : 27 28 35 40 57
+pars                 : 30 39
+parsSTAR             : 49 52
+program              : 0
+statement            : 19 20 21 22 23 24 24 25
+statements           : 15 16
+statementsSTAR       : 19 22
+type                 : 7 8 9 14 55
+unop                 : 34
+var                  : 56
+var_declaration      : 5 17 18
+var_declarationSTAR  : 15 18
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . declaration declarationSTAR
+    (2) program -> . declaration
+    (5) declaration -> . var_declaration
+    (6) declaration -> . fun_declaration
+    (7) var_declaration -> . type NAME SEMICOLON
+    (8) fun_declaration -> . type NAME LPAR formal_pars RPAR block
+    (9) fun_declaration -> . type NAME LPAR RPAR block
+    (53) type -> . INT
+    (54) type -> . CHAR
+    (55) type -> . type LBRACK NUMBER RBRACK
+
+    INT             shift and go to state 2
+    CHAR            shift and go to state 3
+
+    fun_declaration                shift and go to state 1
+    var_declaration                shift and go to state 4
+    program                        shift and go to state 5
+    declaration                    shift and go to state 6
+    type                           shift and go to state 7
+
+state 1
+
+    (6) declaration -> fun_declaration .
+
+    INT             reduce using rule 6 (declaration -> fun_declaration .)
+    CHAR            reduce using rule 6 (declaration -> fun_declaration .)
+    $end            reduce using rule 6 (declaration -> fun_declaration .)
+
+
+state 2
+
+    (53) type -> INT .
+
+    NAME            reduce using rule 53 (type -> INT .)
+    LBRACK          reduce using rule 53 (type -> INT .)
+
+
+state 3
+
+    (54) type -> CHAR .
+
+    NAME            reduce using rule 54 (type -> CHAR .)
+    LBRACK          reduce using rule 54 (type -> CHAR .)
+
+
+state 4
+
+    (5) declaration -> var_declaration .
+
+    INT             reduce using rule 5 (declaration -> var_declaration .)
+    CHAR            reduce using rule 5 (declaration -> var_declaration .)
+    $end            reduce using rule 5 (declaration -> var_declaration .)
+
+
+state 5
+
+    (0) S' -> program .
+
+
+
+state 6
+
+    (1) program -> declaration . declarationSTAR
+    (2) program -> declaration .
+    (3) declarationSTAR -> . declaration
+    (4) declarationSTAR -> . declaration declarationSTAR
+    (5) declaration -> . var_declaration
+    (6) declaration -> . fun_declaration
+    (7) var_declaration -> . type NAME SEMICOLON
+    (8) fun_declaration -> . type NAME LPAR formal_pars RPAR block
+    (9) fun_declaration -> . type NAME LPAR RPAR block
+    (53) type -> . INT
+    (54) type -> . CHAR
+    (55) type -> . type LBRACK NUMBER RBRACK
+
+    $end            reduce using rule 2 (program -> declaration .)
+    INT             shift and go to state 2
+    CHAR            shift and go to state 3
+
+    fun_declaration                shift and go to state 1
+    var_declaration                shift and go to state 4
+    declaration                    shift and go to state 8
+    declarationSTAR                shift and go to state 9
+    type                           shift and go to state 7
+
+state 7
+
+    (7) var_declaration -> type . NAME SEMICOLON
+    (8) fun_declaration -> type . NAME LPAR formal_pars RPAR block
+    (9) fun_declaration -> type . NAME LPAR RPAR block
+    (55) type -> type . LBRACK NUMBER RBRACK
+
+    NAME            shift and go to state 10
+    LBRACK          shift and go to state 11
+
+
+state 8
+
+    (3) declarationSTAR -> declaration .
+    (4) declarationSTAR -> declaration . declarationSTAR
+    (3) declarationSTAR -> . declaration
+    (4) declarationSTAR -> . declaration declarationSTAR
+    (5) declaration -> . var_declaration
+    (6) declaration -> . fun_declaration
+    (7) var_declaration -> . type NAME SEMICOLON
+    (8) fun_declaration -> . type NAME LPAR formal_pars RPAR block
+    (9) fun_declaration -> . type NAME LPAR RPAR block
+    (53) type -> . INT
+    (54) type -> . CHAR
+    (55) type -> . type LBRACK NUMBER RBRACK
+
+    $end            reduce using rule 3 (declarationSTAR -> declaration .)
+    INT             shift and go to state 2
+    CHAR            shift and go to state 3
+
+    fun_declaration                shift and go to state 1
+    var_declaration                shift and go to state 4
+    declaration                    shift and go to state 8
+    declarationSTAR                shift and go to state 12
+    type                           shift and go to state 7
+
+state 9
+
+    (1) program -> declaration declarationSTAR .
+
+    $end            reduce using rule 1 (program -> declaration declarationSTAR .)
+
+
+state 10
+
+    (7) var_declaration -> type NAME . SEMICOLON
+    (8) fun_declaration -> type NAME . LPAR formal_pars RPAR block
+    (9) fun_declaration -> type NAME . LPAR RPAR block
+
+    SEMICOLON       shift and go to state 14
+    LPAR            shift and go to state 13
+
+
+state 11
+
+    (55) type -> type LBRACK . NUMBER RBRACK
+
+    NUMBER          shift and go to state 15
+
+
+state 12
+
+    (4) declarationSTAR -> declaration declarationSTAR .
+
+    $end            reduce using rule 4 (declarationSTAR -> declaration declarationSTAR .)
+
+
+state 13
+
+    (8) fun_declaration -> type NAME LPAR . formal_pars RPAR block
+    (9) fun_declaration -> type NAME LPAR . RPAR block
+    (10) formal_pars -> . formal_par COMMA formal_parsSTAR
+    (11) formal_pars -> . formal_par
+    (14) formal_par -> . type NAME
+    (53) type -> . INT
+    (54) type -> . CHAR
+    (55) type -> . type LBRACK NUMBER RBRACK
+
+    RPAR            shift and go to state 16
+    INT             shift and go to state 2
+    CHAR            shift and go to state 3
+
+    formal_par                     shift and go to state 17
+    type                           shift and go to state 19
+    formal_pars                    shift and go to state 18
+
+state 14
+
+    (7) var_declaration -> type NAME SEMICOLON .
+
+    INT             reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+    CHAR            reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+    $end            reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+    IF              reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+    WHILE           reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+    WRITE           reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+    READ            reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+    RETURN          reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+    NAME            reduce using rule 7 (var_declaration -> type NAME SEMICOLON .)
+
+
+state 15
+
+    (55) type -> type LBRACK NUMBER . RBRACK
+
+    RBRACK          shift and go to state 20
+
+
+state 16
+
+    (9) fun_declaration -> type NAME LPAR RPAR . block
+    (15) block -> . LBRACE var_declarationSTAR statements RBRACE
+    (16) block -> . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 21
+
+    block                          shift and go to state 22
+
+state 17
+
+    (10) formal_pars -> formal_par . COMMA formal_parsSTAR
+    (11) formal_pars -> formal_par .
+
+    COMMA           shift and go to state 23
+    RPAR            reduce using rule 11 (formal_pars -> formal_par .)
+
+
+state 18
+
+    (8) fun_declaration -> type NAME LPAR formal_pars . RPAR block
+
+    RPAR            shift and go to state 24
+
+
+state 19
+
+    (14) formal_par -> type . NAME
+    (55) type -> type . LBRACK NUMBER RBRACK
+
+    NAME            shift and go to state 25
+    LBRACK          shift and go to state 11
+
+
+state 20
+
+    (55) type -> type LBRACK NUMBER RBRACK .
+
+    NAME            reduce using rule 55 (type -> type LBRACK NUMBER RBRACK .)
+    LBRACK          reduce using rule 55 (type -> type LBRACK NUMBER RBRACK .)
+
+
+state 21
+
+    (15) block -> LBRACE . var_declarationSTAR statements RBRACE
+    (16) block -> LBRACE . statements RBRACE
+    (17) var_declarationSTAR -> . var_declaration
+    (18) var_declarationSTAR -> . var_declaration var_declarationSTAR
+    (19) statements -> . statement SEMICOLON statementsSTAR
+    (20) statements -> . statement SEMICOLON
+    (7) var_declaration -> . type NAME SEMICOLON
+    (23) statement -> . IF LPAR exp RPAR statement
+    (24) statement -> . IF LPAR exp RPAR statement ELSE statement
+    (25) statement -> . WHILE LPAR exp RPAR statement
+    (26) statement -> . WRITE exp
+    (27) statement -> . READ lexp
+    (28) statement -> . lexp ASSIGN exp
+    (29) statement -> . RETURN exp
+    (30) statement -> . NAME LPAR pars RPAR
+    (53) type -> . INT
+    (54) type -> . CHAR
+    (55) type -> . type LBRACK NUMBER RBRACK
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    IF              shift and go to state 34
+    WHILE           shift and go to state 28
+    WRITE           shift and go to state 36
+    READ            shift and go to state 27
+    RETURN          shift and go to state 26
+    NAME            shift and go to state 37
+    INT             shift and go to state 2
+    CHAR            shift and go to state 3
+
+    statements                     shift and go to state 29
+    var_declarationSTAR            shift and go to state 38
+    var_declaration                shift and go to state 31
+    statement                      shift and go to state 32
+    var                            shift and go to state 33
+    type                           shift and go to state 35
+    lexp                           shift and go to state 30
+
+state 22
+
+    (9) fun_declaration -> type NAME LPAR RPAR block .
+
+    INT             reduce using rule 9 (fun_declaration -> type NAME LPAR RPAR block .)
+    CHAR            reduce using rule 9 (fun_declaration -> type NAME LPAR RPAR block .)
+    $end            reduce using rule 9 (fun_declaration -> type NAME LPAR RPAR block .)
+
+
+state 23
+
+    (10) formal_pars -> formal_par COMMA . formal_parsSTAR
+    (12) formal_parsSTAR -> . formal_par
+    (13) formal_parsSTAR -> . formal_par COMMA formal_parsSTAR
+    (14) formal_par -> . type NAME
+    (53) type -> . INT
+    (54) type -> . CHAR
+    (55) type -> . type LBRACK NUMBER RBRACK
+
+    INT             shift and go to state 2
+    CHAR            shift and go to state 3
+
+    formal_parsSTAR                shift and go to state 39
+    type                           shift and go to state 19
+    formal_par                     shift and go to state 40
+
+state 24
+
+    (8) fun_declaration -> type NAME LPAR formal_pars RPAR . block
+    (15) block -> . LBRACE var_declarationSTAR statements RBRACE
+    (16) block -> . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 21
+
+    block                          shift and go to state 41
+
+state 25
+
+    (14) formal_par -> type NAME .
+
+    COMMA           reduce using rule 14 (formal_par -> type NAME .)
+    RPAR            reduce using rule 14 (formal_par -> type NAME .)
+
+
+state 26
+
+    (29) statement -> RETURN . exp
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    exp                            shift and go to state 48
+    var                            shift and go to state 33
+
+state 27
+
+    (27) statement -> READ . lexp
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NAME            shift and go to state 53
+
+    var                            shift and go to state 33
+    lexp                           shift and go to state 52
+
+state 28
+
+    (25) statement -> WHILE . LPAR exp RPAR statement
+
+    LPAR            shift and go to state 54
+
+
+state 29
+
+    (16) block -> LBRACE statements . RBRACE
+
+    RBRACE          shift and go to state 55
+
+
+state 30
+
+    (28) statement -> lexp . ASSIGN exp
+    (57) lexp -> lexp . LBRACK exp RBRACK
+
+    ASSIGN          shift and go to state 57
+    LBRACK          shift and go to state 56
+
+
+state 31
+
+    (17) var_declarationSTAR -> var_declaration .
+    (18) var_declarationSTAR -> var_declaration . var_declarationSTAR
+    (17) var_declarationSTAR -> . var_declaration
+    (18) var_declarationSTAR -> . var_declaration var_declarationSTAR
+    (7) var_declaration -> . type NAME SEMICOLON
+    (53) type -> . INT
+    (54) type -> . CHAR
+    (55) type -> . type LBRACK NUMBER RBRACK
+
+    IF              reduce using rule 17 (var_declarationSTAR -> var_declaration .)
+    WHILE           reduce using rule 17 (var_declarationSTAR -> var_declaration .)
+    WRITE           reduce using rule 17 (var_declarationSTAR -> var_declaration .)
+    READ            reduce using rule 17 (var_declarationSTAR -> var_declaration .)
+    RETURN          reduce using rule 17 (var_declarationSTAR -> var_declaration .)
+    NAME            reduce using rule 17 (var_declarationSTAR -> var_declaration .)
+    INT             shift and go to state 2
+    CHAR            shift and go to state 3
+
+    var_declaration                shift and go to state 31
+    type                           shift and go to state 35
+    var_declarationSTAR            shift and go to state 58
+
+state 32
+
+    (19) statements -> statement . SEMICOLON statementsSTAR
+    (20) statements -> statement . SEMICOLON
+
+    SEMICOLON       shift and go to state 59
+
+
+state 33
+
+    (56) lexp -> var .
+
+    LBRACK          reduce using rule 56 (lexp -> var .)
+    MINUS           reduce using rule 56 (lexp -> var .)
+    PLUS            reduce using rule 56 (lexp -> var .)
+    TIMES           reduce using rule 56 (lexp -> var .)
+    DIVIDE          reduce using rule 56 (lexp -> var .)
+    EQUAL           reduce using rule 56 (lexp -> var .)
+    NEQUAL          reduce using rule 56 (lexp -> var .)
+    GREATER         reduce using rule 56 (lexp -> var .)
+    LESS            reduce using rule 56 (lexp -> var .)
+    SEMICOLON       reduce using rule 56 (lexp -> var .)
+    ELSE            reduce using rule 56 (lexp -> var .)
+    ASSIGN          reduce using rule 56 (lexp -> var .)
+    COMMA           reduce using rule 56 (lexp -> var .)
+    RPAR            reduce using rule 56 (lexp -> var .)
+    RBRACK          reduce using rule 56 (lexp -> var .)
+
+
+state 34
+
+    (23) statement -> IF . LPAR exp RPAR statement
+    (24) statement -> IF . LPAR exp RPAR statement ELSE statement
+
+    LPAR            shift and go to state 60
+
+
+state 35
+
+    (7) var_declaration -> type . NAME SEMICOLON
+    (55) type -> type . LBRACK NUMBER RBRACK
+
+    NAME            shift and go to state 61
+    LBRACK          shift and go to state 11
+
+
+state 36
+
+    (26) statement -> WRITE . exp
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    exp                            shift and go to state 62
+    var                            shift and go to state 33
+
+state 37
+
+    (30) statement -> NAME . LPAR pars RPAR
+    (58) var -> NAME .
+
+    LPAR            shift and go to state 63
+    ASSIGN          reduce using rule 58 (var -> NAME .)
+    LBRACK          reduce using rule 58 (var -> NAME .)
+
+
+state 38
+
+    (15) block -> LBRACE var_declarationSTAR . statements RBRACE
+    (19) statements -> . statement SEMICOLON statementsSTAR
+    (20) statements -> . statement SEMICOLON
+    (23) statement -> . IF LPAR exp RPAR statement
+    (24) statement -> . IF LPAR exp RPAR statement ELSE statement
+    (25) statement -> . WHILE LPAR exp RPAR statement
+    (26) statement -> . WRITE exp
+    (27) statement -> . READ lexp
+    (28) statement -> . lexp ASSIGN exp
+    (29) statement -> . RETURN exp
+    (30) statement -> . NAME LPAR pars RPAR
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    IF              shift and go to state 34
+    WHILE           shift and go to state 28
+    WRITE           shift and go to state 36
+    READ            shift and go to state 27
+    RETURN          shift and go to state 26
+    NAME            shift and go to state 37
+
+    statements                     shift and go to state 64
+    statement                      shift and go to state 32
+    var                            shift and go to state 33
+    lexp                           shift and go to state 30
+
+state 39
+
+    (10) formal_pars -> formal_par COMMA formal_parsSTAR .
+
+    RPAR            reduce using rule 10 (formal_pars -> formal_par COMMA formal_parsSTAR .)
+
+
+state 40
+
+    (12) formal_parsSTAR -> formal_par .
+    (13) formal_parsSTAR -> formal_par . COMMA formal_parsSTAR
+
+    RPAR            reduce using rule 12 (formal_parsSTAR -> formal_par .)
+    COMMA           shift and go to state 65
+
+
+state 41
+
+    (8) fun_declaration -> type NAME LPAR formal_pars RPAR block .
+
+    INT             reduce using rule 8 (fun_declaration -> type NAME LPAR formal_pars RPAR block .)
+    CHAR            reduce using rule 8 (fun_declaration -> type NAME LPAR formal_pars RPAR block .)
+    $end            reduce using rule 8 (fun_declaration -> type NAME LPAR formal_pars RPAR block .)
+
+
+state 42
+
+    (34) exp -> unop . exp
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    exp                            shift and go to state 66
+    var                            shift and go to state 33
+
+state 43
+
+    (38) exp -> LPAR . exp RPAR
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    exp                            shift and go to state 67
+    var                            shift and go to state 33
+
+state 44
+
+    (35) exp -> lexp .
+    (57) lexp -> lexp . LBRACK exp RBRACK
+
+    MINUS           reduce using rule 35 (exp -> lexp .)
+    PLUS            reduce using rule 35 (exp -> lexp .)
+    TIMES           reduce using rule 35 (exp -> lexp .)
+    DIVIDE          reduce using rule 35 (exp -> lexp .)
+    EQUAL           reduce using rule 35 (exp -> lexp .)
+    NEQUAL          reduce using rule 35 (exp -> lexp .)
+    GREATER         reduce using rule 35 (exp -> lexp .)
+    LESS            reduce using rule 35 (exp -> lexp .)
+    SEMICOLON       reduce using rule 35 (exp -> lexp .)
+    ELSE            reduce using rule 35 (exp -> lexp .)
+    COMMA           reduce using rule 35 (exp -> lexp .)
+    RPAR            reduce using rule 35 (exp -> lexp .)
+    RBRACK          reduce using rule 35 (exp -> lexp .)
+    LBRACK          shift and go to state 56
+
+
+state 45
+
+    (32) exp -> QCHAR .
+
+    MINUS           reduce using rule 32 (exp -> QCHAR .)
+    PLUS            reduce using rule 32 (exp -> QCHAR .)
+    TIMES           reduce using rule 32 (exp -> QCHAR .)
+    DIVIDE          reduce using rule 32 (exp -> QCHAR .)
+    EQUAL           reduce using rule 32 (exp -> QCHAR .)
+    NEQUAL          reduce using rule 32 (exp -> QCHAR .)
+    GREATER         reduce using rule 32 (exp -> QCHAR .)
+    LESS            reduce using rule 32 (exp -> QCHAR .)
+    SEMICOLON       reduce using rule 32 (exp -> QCHAR .)
+    ELSE            reduce using rule 32 (exp -> QCHAR .)
+    COMMA           reduce using rule 32 (exp -> QCHAR .)
+    RPAR            reduce using rule 32 (exp -> QCHAR .)
+    RBRACK          reduce using rule 32 (exp -> QCHAR .)
+
+
+state 46
+
+    (31) exp -> NUMBER .
+
+    MINUS           reduce using rule 31 (exp -> NUMBER .)
+    PLUS            reduce using rule 31 (exp -> NUMBER .)
+    TIMES           reduce using rule 31 (exp -> NUMBER .)
+    DIVIDE          reduce using rule 31 (exp -> NUMBER .)
+    EQUAL           reduce using rule 31 (exp -> NUMBER .)
+    NEQUAL          reduce using rule 31 (exp -> NUMBER .)
+    GREATER         reduce using rule 31 (exp -> NUMBER .)
+    LESS            reduce using rule 31 (exp -> NUMBER .)
+    SEMICOLON       reduce using rule 31 (exp -> NUMBER .)
+    ELSE            reduce using rule 31 (exp -> NUMBER .)
+    COMMA           reduce using rule 31 (exp -> NUMBER .)
+    RPAR            reduce using rule 31 (exp -> NUMBER .)
+    RBRACK          reduce using rule 31 (exp -> NUMBER .)
+
+
+state 47
+
+    (40) exp -> LENGTH . lexp
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NAME            shift and go to state 53
+
+    var                            shift and go to state 33
+    lexp                           shift and go to state 68
+
+state 48
+
+    (29) statement -> RETURN exp .
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    SEMICOLON       reduce using rule 29 (statement -> RETURN exp .)
+    ELSE            reduce using rule 29 (statement -> RETURN exp .)
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 49
+
+    (37) unop -> NOT .
+
+    NUMBER          reduce using rule 37 (unop -> NOT .)
+    QCHAR           reduce using rule 37 (unop -> NOT .)
+    LPAR            reduce using rule 37 (unop -> NOT .)
+    NAME            reduce using rule 37 (unop -> NOT .)
+    LENGTH          reduce using rule 37 (unop -> NOT .)
+    MINUS           reduce using rule 37 (unop -> NOT .)
+    NOT             reduce using rule 37 (unop -> NOT .)
+
+
+state 50
+
+    (36) unop -> MINUS .
+
+    NUMBER          reduce using rule 36 (unop -> MINUS .)
+    QCHAR           reduce using rule 36 (unop -> MINUS .)
+    LPAR            reduce using rule 36 (unop -> MINUS .)
+    NAME            reduce using rule 36 (unop -> MINUS .)
+    LENGTH          reduce using rule 36 (unop -> MINUS .)
+    MINUS           reduce using rule 36 (unop -> MINUS .)
+    NOT             reduce using rule 36 (unop -> MINUS .)
+
+
+state 51
+
+    (39) exp -> NAME . LPAR pars RPAR
+    (58) var -> NAME .
+
+    LPAR            shift and go to state 78
+    LBRACK          reduce using rule 58 (var -> NAME .)
+    RBRACK          reduce using rule 58 (var -> NAME .)
+    MINUS           reduce using rule 58 (var -> NAME .)
+    PLUS            reduce using rule 58 (var -> NAME .)
+    TIMES           reduce using rule 58 (var -> NAME .)
+    DIVIDE          reduce using rule 58 (var -> NAME .)
+    EQUAL           reduce using rule 58 (var -> NAME .)
+    NEQUAL          reduce using rule 58 (var -> NAME .)
+    GREATER         reduce using rule 58 (var -> NAME .)
+    LESS            reduce using rule 58 (var -> NAME .)
+    RPAR            reduce using rule 58 (var -> NAME .)
+    COMMA           reduce using rule 58 (var -> NAME .)
+    SEMICOLON       reduce using rule 58 (var -> NAME .)
+    ELSE            reduce using rule 58 (var -> NAME .)
+
+
+state 52
+
+    (27) statement -> READ lexp .
+    (57) lexp -> lexp . LBRACK exp RBRACK
+
+    SEMICOLON       reduce using rule 27 (statement -> READ lexp .)
+    ELSE            reduce using rule 27 (statement -> READ lexp .)
+    LBRACK          shift and go to state 56
+
+
+state 53
+
+    (58) var -> NAME .
+
+    LBRACK          reduce using rule 58 (var -> NAME .)
+    MINUS           reduce using rule 58 (var -> NAME .)
+    PLUS            reduce using rule 58 (var -> NAME .)
+    TIMES           reduce using rule 58 (var -> NAME .)
+    DIVIDE          reduce using rule 58 (var -> NAME .)
+    EQUAL           reduce using rule 58 (var -> NAME .)
+    NEQUAL          reduce using rule 58 (var -> NAME .)
+    GREATER         reduce using rule 58 (var -> NAME .)
+    LESS            reduce using rule 58 (var -> NAME .)
+    SEMICOLON       reduce using rule 58 (var -> NAME .)
+    ELSE            reduce using rule 58 (var -> NAME .)
+    RPAR            reduce using rule 58 (var -> NAME .)
+    RBRACK          reduce using rule 58 (var -> NAME .)
+    COMMA           reduce using rule 58 (var -> NAME .)
+
+
+state 54
+
+    (25) statement -> WHILE LPAR . exp RPAR statement
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    var                            shift and go to state 33
+    exp                            shift and go to state 79
+
+state 55
+
+    (16) block -> LBRACE statements RBRACE .
+
+    INT             reduce using rule 16 (block -> LBRACE statements RBRACE .)
+    CHAR            reduce using rule 16 (block -> LBRACE statements RBRACE .)
+    $end            reduce using rule 16 (block -> LBRACE statements RBRACE .)
+
+
+state 56
+
+    (57) lexp -> lexp LBRACK . exp RBRACK
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    exp                            shift and go to state 80
+    var                            shift and go to state 33
+
+state 57
+
+    (28) statement -> lexp ASSIGN . exp
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    exp                            shift and go to state 81
+    var                            shift and go to state 33
+
+state 58
+
+    (18) var_declarationSTAR -> var_declaration var_declarationSTAR .
+
+    IF              reduce using rule 18 (var_declarationSTAR -> var_declaration var_declarationSTAR .)
+    WHILE           reduce using rule 18 (var_declarationSTAR -> var_declaration var_declarationSTAR .)
+    WRITE           reduce using rule 18 (var_declarationSTAR -> var_declaration var_declarationSTAR .)
+    READ            reduce using rule 18 (var_declarationSTAR -> var_declaration var_declarationSTAR .)
+    RETURN          reduce using rule 18 (var_declarationSTAR -> var_declaration var_declarationSTAR .)
+    NAME            reduce using rule 18 (var_declarationSTAR -> var_declaration var_declarationSTAR .)
+
+
+state 59
+
+    (19) statements -> statement SEMICOLON . statementsSTAR
+    (20) statements -> statement SEMICOLON .
+    (21) statementsSTAR -> . statement SEMICOLON
+    (22) statementsSTAR -> . statement SEMICOLON statementsSTAR
+    (23) statement -> . IF LPAR exp RPAR statement
+    (24) statement -> . IF LPAR exp RPAR statement ELSE statement
+    (25) statement -> . WHILE LPAR exp RPAR statement
+    (26) statement -> . WRITE exp
+    (27) statement -> . READ lexp
+    (28) statement -> . lexp ASSIGN exp
+    (29) statement -> . RETURN exp
+    (30) statement -> . NAME LPAR pars RPAR
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    RBRACE          reduce using rule 20 (statements -> statement SEMICOLON .)
+    IF              shift and go to state 34
+    WHILE           shift and go to state 28
+    WRITE           shift and go to state 36
+    READ            shift and go to state 27
+    RETURN          shift and go to state 26
+    NAME            shift and go to state 37
+
+    statement                      shift and go to state 82
+    statementsSTAR                 shift and go to state 83
+    var                            shift and go to state 33
+    lexp                           shift and go to state 30
+
+state 60
+
+    (23) statement -> IF LPAR . exp RPAR statement
+    (24) statement -> IF LPAR . exp RPAR statement ELSE statement
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    var                            shift and go to state 33
+    exp                            shift and go to state 84
+
+state 61
+
+    (7) var_declaration -> type NAME . SEMICOLON
+
+    SEMICOLON       shift and go to state 14
+
+
+state 62
+
+    (26) statement -> WRITE exp .
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    SEMICOLON       reduce using rule 26 (statement -> WRITE exp .)
+    ELSE            reduce using rule 26 (statement -> WRITE exp .)
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 63
+
+    (30) statement -> NAME LPAR . pars RPAR
+    (49) pars -> . exp COMMA parsSTAR
+    (50) pars -> . exp
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    var                            shift and go to state 33
+    pars                           shift and go to state 86
+    exp                            shift and go to state 85
+
+state 64
+
+    (15) block -> LBRACE var_declarationSTAR statements . RBRACE
+
+    RBRACE          shift and go to state 87
+
+
+state 65
+
+    (13) formal_parsSTAR -> formal_par COMMA . formal_parsSTAR
+    (12) formal_parsSTAR -> . formal_par
+    (13) formal_parsSTAR -> . formal_par COMMA formal_parsSTAR
+    (14) formal_par -> . type NAME
+    (53) type -> . INT
+    (54) type -> . CHAR
+    (55) type -> . type LBRACK NUMBER RBRACK
+
+    INT             shift and go to state 2
+    CHAR            shift and go to state 3
+
+    formal_parsSTAR                shift and go to state 88
+    type                           shift and go to state 19
+    formal_par                     shift and go to state 40
+
+state 66
+
+    (34) exp -> unop exp .
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for EQUAL resolved as shift
+  ! shift/reduce conflict for NEQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    SEMICOLON       reduce using rule 34 (exp -> unop exp .)
+    ELSE            reduce using rule 34 (exp -> unop exp .)
+    COMMA           reduce using rule 34 (exp -> unop exp .)
+    RPAR            reduce using rule 34 (exp -> unop exp .)
+    RBRACK          reduce using rule 34 (exp -> unop exp .)
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+  ! MINUS           [ reduce using rule 34 (exp -> unop exp .) ]
+  ! PLUS            [ reduce using rule 34 (exp -> unop exp .) ]
+  ! TIMES           [ reduce using rule 34 (exp -> unop exp .) ]
+  ! DIVIDE          [ reduce using rule 34 (exp -> unop exp .) ]
+  ! EQUAL           [ reduce using rule 34 (exp -> unop exp .) ]
+  ! NEQUAL          [ reduce using rule 34 (exp -> unop exp .) ]
+  ! GREATER         [ reduce using rule 34 (exp -> unop exp .) ]
+  ! LESS            [ reduce using rule 34 (exp -> unop exp .) ]
+
+    binop                          shift and go to state 70
+
+state 67
+
+    (38) exp -> LPAR exp . RPAR
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    RPAR            shift and go to state 89
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 68
+
+    (40) exp -> LENGTH lexp .
+    (57) lexp -> lexp . LBRACK exp RBRACK
+
+    MINUS           reduce using rule 40 (exp -> LENGTH lexp .)
+    PLUS            reduce using rule 40 (exp -> LENGTH lexp .)
+    TIMES           reduce using rule 40 (exp -> LENGTH lexp .)
+    DIVIDE          reduce using rule 40 (exp -> LENGTH lexp .)
+    EQUAL           reduce using rule 40 (exp -> LENGTH lexp .)
+    NEQUAL          reduce using rule 40 (exp -> LENGTH lexp .)
+    GREATER         reduce using rule 40 (exp -> LENGTH lexp .)
+    LESS            reduce using rule 40 (exp -> LENGTH lexp .)
+    SEMICOLON       reduce using rule 40 (exp -> LENGTH lexp .)
+    ELSE            reduce using rule 40 (exp -> LENGTH lexp .)
+    COMMA           reduce using rule 40 (exp -> LENGTH lexp .)
+    RPAR            reduce using rule 40 (exp -> LENGTH lexp .)
+    RBRACK          reduce using rule 40 (exp -> LENGTH lexp .)
+    LBRACK          shift and go to state 56
+
+
+state 69
+
+    (44) binop -> DIVIDE .
+
+    NUMBER          reduce using rule 44 (binop -> DIVIDE .)
+    QCHAR           reduce using rule 44 (binop -> DIVIDE .)
+    LPAR            reduce using rule 44 (binop -> DIVIDE .)
+    NAME            reduce using rule 44 (binop -> DIVIDE .)
+    LENGTH          reduce using rule 44 (binop -> DIVIDE .)
+    MINUS           reduce using rule 44 (binop -> DIVIDE .)
+    NOT             reduce using rule 44 (binop -> DIVIDE .)
+
+
+state 70
+
+    (33) exp -> exp binop . exp
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    exp                            shift and go to state 90
+    var                            shift and go to state 33
+
+state 71
+
+    (48) binop -> LESS .
+
+    NUMBER          reduce using rule 48 (binop -> LESS .)
+    QCHAR           reduce using rule 48 (binop -> LESS .)
+    LPAR            reduce using rule 48 (binop -> LESS .)
+    NAME            reduce using rule 48 (binop -> LESS .)
+    LENGTH          reduce using rule 48 (binop -> LESS .)
+    MINUS           reduce using rule 48 (binop -> LESS .)
+    NOT             reduce using rule 48 (binop -> LESS .)
+
+
+state 72
+
+    (46) binop -> NEQUAL .
+
+    NUMBER          reduce using rule 46 (binop -> NEQUAL .)
+    QCHAR           reduce using rule 46 (binop -> NEQUAL .)
+    LPAR            reduce using rule 46 (binop -> NEQUAL .)
+    NAME            reduce using rule 46 (binop -> NEQUAL .)
+    LENGTH          reduce using rule 46 (binop -> NEQUAL .)
+    MINUS           reduce using rule 46 (binop -> NEQUAL .)
+    NOT             reduce using rule 46 (binop -> NEQUAL .)
+
+
+state 73
+
+    (45) binop -> EQUAL .
+
+    NUMBER          reduce using rule 45 (binop -> EQUAL .)
+    QCHAR           reduce using rule 45 (binop -> EQUAL .)
+    LPAR            reduce using rule 45 (binop -> EQUAL .)
+    NAME            reduce using rule 45 (binop -> EQUAL .)
+    LENGTH          reduce using rule 45 (binop -> EQUAL .)
+    MINUS           reduce using rule 45 (binop -> EQUAL .)
+    NOT             reduce using rule 45 (binop -> EQUAL .)
+
+
+state 74
+
+    (43) binop -> TIMES .
+
+    NUMBER          reduce using rule 43 (binop -> TIMES .)
+    QCHAR           reduce using rule 43 (binop -> TIMES .)
+    LPAR            reduce using rule 43 (binop -> TIMES .)
+    NAME            reduce using rule 43 (binop -> TIMES .)
+    LENGTH          reduce using rule 43 (binop -> TIMES .)
+    MINUS           reduce using rule 43 (binop -> TIMES .)
+    NOT             reduce using rule 43 (binop -> TIMES .)
+
+
+state 75
+
+    (42) binop -> PLUS .
+
+    NUMBER          reduce using rule 42 (binop -> PLUS .)
+    QCHAR           reduce using rule 42 (binop -> PLUS .)
+    LPAR            reduce using rule 42 (binop -> PLUS .)
+    NAME            reduce using rule 42 (binop -> PLUS .)
+    LENGTH          reduce using rule 42 (binop -> PLUS .)
+    MINUS           reduce using rule 42 (binop -> PLUS .)
+    NOT             reduce using rule 42 (binop -> PLUS .)
+
+
+state 76
+
+    (41) binop -> MINUS .
+
+    NUMBER          reduce using rule 41 (binop -> MINUS .)
+    QCHAR           reduce using rule 41 (binop -> MINUS .)
+    LPAR            reduce using rule 41 (binop -> MINUS .)
+    NAME            reduce using rule 41 (binop -> MINUS .)
+    LENGTH          reduce using rule 41 (binop -> MINUS .)
+    MINUS           reduce using rule 41 (binop -> MINUS .)
+    NOT             reduce using rule 41 (binop -> MINUS .)
+
+
+state 77
+
+    (47) binop -> GREATER .
+
+    NUMBER          reduce using rule 47 (binop -> GREATER .)
+    QCHAR           reduce using rule 47 (binop -> GREATER .)
+    LPAR            reduce using rule 47 (binop -> GREATER .)
+    NAME            reduce using rule 47 (binop -> GREATER .)
+    LENGTH          reduce using rule 47 (binop -> GREATER .)
+    MINUS           reduce using rule 47 (binop -> GREATER .)
+    NOT             reduce using rule 47 (binop -> GREATER .)
+
+
+state 78
+
+    (39) exp -> NAME LPAR . pars RPAR
+    (49) pars -> . exp COMMA parsSTAR
+    (50) pars -> . exp
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    var                            shift and go to state 33
+    pars                           shift and go to state 91
+    exp                            shift and go to state 85
+
+state 79
+
+    (25) statement -> WHILE LPAR exp . RPAR statement
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    RPAR            shift and go to state 92
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 80
+
+    (57) lexp -> lexp LBRACK exp . RBRACK
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    RBRACK          shift and go to state 93
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 81
+
+    (28) statement -> lexp ASSIGN exp .
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    SEMICOLON       reduce using rule 28 (statement -> lexp ASSIGN exp .)
+    ELSE            reduce using rule 28 (statement -> lexp ASSIGN exp .)
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 82
+
+    (21) statementsSTAR -> statement . SEMICOLON
+    (22) statementsSTAR -> statement . SEMICOLON statementsSTAR
+
+    SEMICOLON       shift and go to state 94
+
+
+state 83
+
+    (19) statements -> statement SEMICOLON statementsSTAR .
+
+    RBRACE          reduce using rule 19 (statements -> statement SEMICOLON statementsSTAR .)
+
+
+state 84
+
+    (23) statement -> IF LPAR exp . RPAR statement
+    (24) statement -> IF LPAR exp . RPAR statement ELSE statement
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    RPAR            shift and go to state 95
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 85
+
+    (49) pars -> exp . COMMA parsSTAR
+    (50) pars -> exp .
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    COMMA           shift and go to state 96
+    RPAR            reduce using rule 50 (pars -> exp .)
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 86
+
+    (30) statement -> NAME LPAR pars . RPAR
+
+    RPAR            shift and go to state 97
+
+
+state 87
+
+    (15) block -> LBRACE var_declarationSTAR statements RBRACE .
+
+    INT             reduce using rule 15 (block -> LBRACE var_declarationSTAR statements RBRACE .)
+    CHAR            reduce using rule 15 (block -> LBRACE var_declarationSTAR statements RBRACE .)
+    $end            reduce using rule 15 (block -> LBRACE var_declarationSTAR statements RBRACE .)
+
+
+state 88
+
+    (13) formal_parsSTAR -> formal_par COMMA formal_parsSTAR .
+
+    RPAR            reduce using rule 13 (formal_parsSTAR -> formal_par COMMA formal_parsSTAR .)
+
+
+state 89
+
+    (38) exp -> LPAR exp RPAR .
+
+    MINUS           reduce using rule 38 (exp -> LPAR exp RPAR .)
+    PLUS            reduce using rule 38 (exp -> LPAR exp RPAR .)
+    TIMES           reduce using rule 38 (exp -> LPAR exp RPAR .)
+    DIVIDE          reduce using rule 38 (exp -> LPAR exp RPAR .)
+    EQUAL           reduce using rule 38 (exp -> LPAR exp RPAR .)
+    NEQUAL          reduce using rule 38 (exp -> LPAR exp RPAR .)
+    GREATER         reduce using rule 38 (exp -> LPAR exp RPAR .)
+    LESS            reduce using rule 38 (exp -> LPAR exp RPAR .)
+    SEMICOLON       reduce using rule 38 (exp -> LPAR exp RPAR .)
+    ELSE            reduce using rule 38 (exp -> LPAR exp RPAR .)
+    COMMA           reduce using rule 38 (exp -> LPAR exp RPAR .)
+    RPAR            reduce using rule 38 (exp -> LPAR exp RPAR .)
+    RBRACK          reduce using rule 38 (exp -> LPAR exp RPAR .)
+
+
+state 90
+
+    (33) exp -> exp binop exp .
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for EQUAL resolved as shift
+  ! shift/reduce conflict for NEQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    SEMICOLON       reduce using rule 33 (exp -> exp binop exp .)
+    ELSE            reduce using rule 33 (exp -> exp binop exp .)
+    COMMA           reduce using rule 33 (exp -> exp binop exp .)
+    RPAR            reduce using rule 33 (exp -> exp binop exp .)
+    RBRACK          reduce using rule 33 (exp -> exp binop exp .)
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+  ! MINUS           [ reduce using rule 33 (exp -> exp binop exp .) ]
+  ! PLUS            [ reduce using rule 33 (exp -> exp binop exp .) ]
+  ! TIMES           [ reduce using rule 33 (exp -> exp binop exp .) ]
+  ! DIVIDE          [ reduce using rule 33 (exp -> exp binop exp .) ]
+  ! EQUAL           [ reduce using rule 33 (exp -> exp binop exp .) ]
+  ! NEQUAL          [ reduce using rule 33 (exp -> exp binop exp .) ]
+  ! GREATER         [ reduce using rule 33 (exp -> exp binop exp .) ]
+  ! LESS            [ reduce using rule 33 (exp -> exp binop exp .) ]
+
+    binop                          shift and go to state 70
+
+state 91
+
+    (39) exp -> NAME LPAR pars . RPAR
+
+    RPAR            shift and go to state 98
+
+
+state 92
+
+    (25) statement -> WHILE LPAR exp RPAR . statement
+    (23) statement -> . IF LPAR exp RPAR statement
+    (24) statement -> . IF LPAR exp RPAR statement ELSE statement
+    (25) statement -> . WHILE LPAR exp RPAR statement
+    (26) statement -> . WRITE exp
+    (27) statement -> . READ lexp
+    (28) statement -> . lexp ASSIGN exp
+    (29) statement -> . RETURN exp
+    (30) statement -> . NAME LPAR pars RPAR
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    IF              shift and go to state 34
+    WHILE           shift and go to state 28
+    WRITE           shift and go to state 36
+    READ            shift and go to state 27
+    RETURN          shift and go to state 26
+    NAME            shift and go to state 37
+
+    var                            shift and go to state 33
+    statement                      shift and go to state 99
+    lexp                           shift and go to state 30
+
+state 93
+
+    (57) lexp -> lexp LBRACK exp RBRACK .
+
+    LBRACK          reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    MINUS           reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    PLUS            reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    TIMES           reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    DIVIDE          reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    EQUAL           reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    NEQUAL          reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    GREATER         reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    LESS            reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    SEMICOLON       reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    ELSE            reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    ASSIGN          reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    COMMA           reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    RPAR            reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+    RBRACK          reduce using rule 57 (lexp -> lexp LBRACK exp RBRACK .)
+
+
+state 94
+
+    (21) statementsSTAR -> statement SEMICOLON .
+    (22) statementsSTAR -> statement SEMICOLON . statementsSTAR
+    (21) statementsSTAR -> . statement SEMICOLON
+    (22) statementsSTAR -> . statement SEMICOLON statementsSTAR
+    (23) statement -> . IF LPAR exp RPAR statement
+    (24) statement -> . IF LPAR exp RPAR statement ELSE statement
+    (25) statement -> . WHILE LPAR exp RPAR statement
+    (26) statement -> . WRITE exp
+    (27) statement -> . READ lexp
+    (28) statement -> . lexp ASSIGN exp
+    (29) statement -> . RETURN exp
+    (30) statement -> . NAME LPAR pars RPAR
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    RBRACE          reduce using rule 21 (statementsSTAR -> statement SEMICOLON .)
+    IF              shift and go to state 34
+    WHILE           shift and go to state 28
+    WRITE           shift and go to state 36
+    READ            shift and go to state 27
+    RETURN          shift and go to state 26
+    NAME            shift and go to state 37
+
+    statement                      shift and go to state 82
+    statementsSTAR                 shift and go to state 100
+    var                            shift and go to state 33
+    lexp                           shift and go to state 30
+
+state 95
+
+    (23) statement -> IF LPAR exp RPAR . statement
+    (24) statement -> IF LPAR exp RPAR . statement ELSE statement
+    (23) statement -> . IF LPAR exp RPAR statement
+    (24) statement -> . IF LPAR exp RPAR statement ELSE statement
+    (25) statement -> . WHILE LPAR exp RPAR statement
+    (26) statement -> . WRITE exp
+    (27) statement -> . READ lexp
+    (28) statement -> . lexp ASSIGN exp
+    (29) statement -> . RETURN exp
+    (30) statement -> . NAME LPAR pars RPAR
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    IF              shift and go to state 34
+    WHILE           shift and go to state 28
+    WRITE           shift and go to state 36
+    READ            shift and go to state 27
+    RETURN          shift and go to state 26
+    NAME            shift and go to state 37
+
+    var                            shift and go to state 33
+    statement                      shift and go to state 101
+    lexp                           shift and go to state 30
+
+state 96
+
+    (49) pars -> exp COMMA . parsSTAR
+    (51) parsSTAR -> . exp
+    (52) parsSTAR -> . exp COMMA parsSTAR
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    var                            shift and go to state 33
+    exp                            shift and go to state 102
+    parsSTAR                       shift and go to state 103
+
+state 97
+
+    (30) statement -> NAME LPAR pars RPAR .
+
+    SEMICOLON       reduce using rule 30 (statement -> NAME LPAR pars RPAR .)
+    ELSE            reduce using rule 30 (statement -> NAME LPAR pars RPAR .)
+
+
+state 98
+
+    (39) exp -> NAME LPAR pars RPAR .
+
+    MINUS           reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    PLUS            reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    TIMES           reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    DIVIDE          reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    EQUAL           reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    NEQUAL          reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    GREATER         reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    LESS            reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    SEMICOLON       reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    ELSE            reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    COMMA           reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    RPAR            reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+    RBRACK          reduce using rule 39 (exp -> NAME LPAR pars RPAR .)
+
+
+state 99
+
+    (25) statement -> WHILE LPAR exp RPAR statement .
+
+    SEMICOLON       reduce using rule 25 (statement -> WHILE LPAR exp RPAR statement .)
+    ELSE            reduce using rule 25 (statement -> WHILE LPAR exp RPAR statement .)
+
+
+state 100
+
+    (22) statementsSTAR -> statement SEMICOLON statementsSTAR .
+
+    RBRACE          reduce using rule 22 (statementsSTAR -> statement SEMICOLON statementsSTAR .)
+
+
+state 101
+
+    (23) statement -> IF LPAR exp RPAR statement .
+    (24) statement -> IF LPAR exp RPAR statement . ELSE statement
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    SEMICOLON       reduce using rule 23 (statement -> IF LPAR exp RPAR statement .)
+    ELSE            shift and go to state 104
+
+  ! ELSE            [ reduce using rule 23 (statement -> IF LPAR exp RPAR statement .) ]
+
+
+state 102
+
+    (51) parsSTAR -> exp .
+    (52) parsSTAR -> exp . COMMA parsSTAR
+    (33) exp -> exp . binop exp
+    (41) binop -> . MINUS
+    (42) binop -> . PLUS
+    (43) binop -> . TIMES
+    (44) binop -> . DIVIDE
+    (45) binop -> . EQUAL
+    (46) binop -> . NEQUAL
+    (47) binop -> . GREATER
+    (48) binop -> . LESS
+
+    RPAR            reduce using rule 51 (parsSTAR -> exp .)
+    COMMA           shift and go to state 105
+    MINUS           shift and go to state 76
+    PLUS            shift and go to state 75
+    TIMES           shift and go to state 74
+    DIVIDE          shift and go to state 69
+    EQUAL           shift and go to state 73
+    NEQUAL          shift and go to state 72
+    GREATER         shift and go to state 77
+    LESS            shift and go to state 71
+
+    binop                          shift and go to state 70
+
+state 103
+
+    (49) pars -> exp COMMA parsSTAR .
+
+    RPAR            reduce using rule 49 (pars -> exp COMMA parsSTAR .)
+
+
+state 104
+
+    (24) statement -> IF LPAR exp RPAR statement ELSE . statement
+    (23) statement -> . IF LPAR exp RPAR statement
+    (24) statement -> . IF LPAR exp RPAR statement ELSE statement
+    (25) statement -> . WHILE LPAR exp RPAR statement
+    (26) statement -> . WRITE exp
+    (27) statement -> . READ lexp
+    (28) statement -> . lexp ASSIGN exp
+    (29) statement -> . RETURN exp
+    (30) statement -> . NAME LPAR pars RPAR
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    IF              shift and go to state 34
+    WHILE           shift and go to state 28
+    WRITE           shift and go to state 36
+    READ            shift and go to state 27
+    RETURN          shift and go to state 26
+    NAME            shift and go to state 37
+
+    var                            shift and go to state 33
+    statement                      shift and go to state 106
+    lexp                           shift and go to state 30
+
+state 105
+
+    (52) parsSTAR -> exp COMMA . parsSTAR
+    (51) parsSTAR -> . exp
+    (52) parsSTAR -> . exp COMMA parsSTAR
+    (31) exp -> . NUMBER
+    (32) exp -> . QCHAR
+    (33) exp -> . exp binop exp
+    (34) exp -> . unop exp
+    (35) exp -> . lexp
+    (38) exp -> . LPAR exp RPAR
+    (39) exp -> . NAME LPAR pars RPAR
+    (40) exp -> . LENGTH lexp
+    (36) unop -> . MINUS
+    (37) unop -> . NOT
+    (56) lexp -> . var
+    (57) lexp -> . lexp LBRACK exp RBRACK
+    (58) var -> . NAME
+
+    NUMBER          shift and go to state 46
+    QCHAR           shift and go to state 45
+    LPAR            shift and go to state 43
+    NAME            shift and go to state 51
+    LENGTH          shift and go to state 47
+    MINUS           shift and go to state 50
+    NOT             shift and go to state 49
+
+    unop                           shift and go to state 42
+    lexp                           shift and go to state 44
+    var                            shift and go to state 33
+    exp                            shift and go to state 102
+    parsSTAR                       shift and go to state 107
+
+state 106
+
+    (24) statement -> IF LPAR exp RPAR statement ELSE statement .
+
+    SEMICOLON       reduce using rule 24 (statement -> IF LPAR exp RPAR statement ELSE statement .)
+    ELSE            reduce using rule 24 (statement -> IF LPAR exp RPAR statement ELSE statement .)
+
+
+state 107
+
+    (52) parsSTAR -> exp COMMA parsSTAR .
+
+    RPAR            reduce using rule 52 (parsSTAR -> exp COMMA parsSTAR .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for MINUS in state 66 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 66 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 66 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 66 resolved as shift
+WARNING: shift/reduce conflict for EQUAL in state 66 resolved as shift
+WARNING: shift/reduce conflict for NEQUAL in state 66 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 66 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 66 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 90 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 90 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 90 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 90 resolved as shift
+WARNING: shift/reduce conflict for EQUAL in state 90 resolved as shift
+WARNING: shift/reduce conflict for NEQUAL in state 90 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 90 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 90 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 101 resolved as shift

@@ -1,0 +1,20 @@
+
+
+#Importeer onze compileronderdelen
+from yacc import *
+import frontend as frontend
+
+data = '''int main() {
+write 5 + 5;
+write 25*25;
+}'''
+
+
+
+#Build parse tree
+tree = yacc.parse(data, 1)
+print tree
+#Traverse tree for TAC-generation
+code = []
+frontend.traversal(tree, code)
+print frontend.show_code(code)
